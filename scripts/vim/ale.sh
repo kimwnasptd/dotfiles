@@ -1,0 +1,12 @@
+echo "Installing Python related linters/formatters..."
+sudo apt install -y isort python3-pylsp python3-autopep8 \
+    flake8
+
+echo "Installing golang linters/formatters..."
+go install golang.org/x/tools/cmd/goimports@latest
+go install golang.org/x/tools/gopls@latest
+go install golang.org/x/lint/golint@latest
+
+echo "Installing frontend linters/formatters..."
+sudo apt install eslint npm -y
+sudo npm install -g typescript-language-server typescript prettier

@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""
+A helper script that is used for producing a GH link for a file.The script
+will parse the dir contents and create a GH URL by figuring out:
+1. The root of the git project
+2. The http remote, by checking the git remotes
+3. The branch currently in
+"""
+import logging
+import os
+import sys
+
+import git
+
+logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
+
+ROOT_DIR = "/"
+GIT_DIR = ".git"
+
+
+def get_abs_file_path(target_file):
+    """Return the absolute path of a file."""
+    if "~/" in target_file:
+        # for some reason isabs returns False here
+        return target_file
+
+    if os.path.isabs(target_file):
+        return target_file
+
+    return os.path.join(os.getcwd(), target_file)
+
+
+def get_git_root(file):
+    """Return the dir that contains a .git folder."""
+    curr_dir = os.path.dirname(file)
+    while curr_dir != ROOT_DIR:
+        git_folder = os.path.join(curr_dir, GIT_DIR)
+
+        if os.path.isdir(git_folder):
+            return curr_dir
+
+        curr_dir = os.path.dirname(curr_dir)
+
+    logging.error("Cound not find a parent .git folder for file: %s", file)
+    return ""
+
+
+def get_git_commit(git_root_dir):
+    """Return the commit of current HEAD."""
+    repo = git.Repo(git_root_dir)
+
+    # check if commit corresponds to a tag
+    tags = {}
+    for t in repo.tags:
+        tags.setdefault(repo.commit(t), []).append(t)
+
+    matched_tags = tags.get(repo.head.commit, [])
+    if len(matched_tags):
+        return tags[repo.head.commit][0].name
+
+    # no tags correspond to commit, try for branch name
+    try:
+        return repo.active_branch.name
+    except TypeError:
+        logging.debug("In deteched head.")
+        return repo.head.commit.hexsha
+
+
+def get_remote(git_root_dir, remote_name):
+    """Check if the provided remote exists in the repo."""
+    repo = git.Repo(git_root_dir)
+
+    for remote in repo.remotes:
+        if remote.name == remote_name:
+            return remote
+
+    return None
+
+
+def get_gh_base_url(remote_url: str) -> str:
+    """Return the GH https URL from a remote url."""
+    if remote_url[-4:] == ".git":
+        remote_url = remote_url[:-4]
+
+    if "https://" in remote_url:
+        return remote_url
+
+    # git@github.com:arrikto/prv-kubeflow-kubeflow
+    org = remote_url.split(":")[1].split("/")[0]
+    repo = remote_url.split(":")[1].split("/")[1]
+    return "https://github.com/%s/%s" % (org, repo)
+
+
+# def get_gh_url_suffix(git_root_dir, target_file
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        logging.error(
+            "You need to pass exactly two arguments: filename, remote")
+        sys.exit(1)
+
+    remote_name = sys.argv[1]
+    target_file = get_abs_file_path(sys.argv[2])
+
+    logging.debug("Creating GH link for file: %s", target_file)
+
+    if not os.path.exists(target_file):
+        logging.error("File '%s' does not exist!", target_file)
+        sys.exit(1)
+
+    # find the git root
+    git_root_dir = get_git_root(target_file)
+    if not git_root_dir:
+        sys.exit(1)
+
+    # ensure the remote exists
+    remote = get_remote(git_root_dir, remote_name)
+    if not remote:
+        logging.error("Provided remote '%s' does not exist.", remote_name)
+        sys.exit(1)
+
+    # find the git commit
+    commit = get_git_commit(git_root_dir)
+    logging.debug("Current commit: %s", commit)
+
+    # create GH url from remote url
+    base_url = get_gh_base_url(remote.url)
+    logging.debug(base_url)
+
+    # get file url suffix
+    file_path = os.path.relpath(target_file, git_root_dir)
+    object_type = "tree" if os.path.isdir(target_file) else "blob"
+    print(os.path.join(base_url, object_type, commit, file_path))

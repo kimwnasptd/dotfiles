@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Arrikto Browser
+Comment=A Web Browser with Arrikto credentials
+Exec=google-chrome-stable --user-data-dir=/home/kimonas/.config/google-chrome-arrikto
+Icon=google-chrome
+Type=Application
+Categories=Network;WebBrowser
