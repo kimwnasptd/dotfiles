@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -o xtrace
 
 sudo apt install python3-venv
 
