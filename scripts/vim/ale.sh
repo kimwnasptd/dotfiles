@@ -1,6 +1,6 @@
 set -o xtrace
 echo "Installing Python related linters/formatters..."
-sudo apt install -y isort python3-pylsp python3-autopep8 \
+apt install -y isort python3-pylsp python3-autopep8 \
     flake8
 
 echo "Installing golang linters/formatters..."
