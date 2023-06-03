@@ -3,7 +3,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 apt remove docker docker-engine docker.io containerd runc
 
 apt update
-apt install \
+apt install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -20,7 +20,7 @@ echo \
 
 # install docker engine
 apt-get update
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # remove need for sudo
 groupadd docker
