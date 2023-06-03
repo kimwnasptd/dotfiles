@@ -2,7 +2,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo "Installing tmux..."
-sudo apt install tmux
+apt install tmux
 
 echo "Setting up tpm..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
