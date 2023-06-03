@@ -4,9 +4,7 @@ set -e
 mkdir -p ~/.local/bin
 
 ./k8s.sh
-./pass.sh
 ./golang.sh
-./gcloud.sh
 ./nodejs.sh
 ./bash/bash.sh
 ./tmux/tmux.sh
