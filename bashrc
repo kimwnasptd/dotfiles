@@ -169,7 +169,6 @@ function link-chrome-exe {
 alias paclist='pacman -Q | grep '
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
 alias globalip='curl ipinfo.io/ip'
-alias arrikto-chrome='google-chrome-stable --user-data-dir=/home/$USER/.config/google-chrome-arrikto/'
 alias ts="tmux new -s "
 alias ta="tmux attach -t "
 alias scale-up='gsettings set org.gnome.desktop.interface text-scaling-factor "1.33" && gsettings set org.gnome.desktop.interface cursor-size "32"'
@@ -201,7 +200,7 @@ alias vimrc="vim $HOME/.vimrc"
 export NOANAPATH=$PATH
 export PATH="/opt/anaconda/bin:$PATH"
 export PATH="/snap/bin:$PATH"
-export PATH="/home/$USER/go/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH=$PATH:/usr/local/kubebuilder/bin
