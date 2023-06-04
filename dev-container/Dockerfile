@@ -1,8 +1,51 @@
 FROM ubuntu:22.04
 
-RUN apt update && apt install -y vim git curl
-
-RUN git clone https://github.com/kimwnasptd/dotfiles
-RUN cd dotfiles/scripts
 ENV USER=root
-RUN /bin/bash setup.sh
+
+RUN apt update && apt install -y vim git curl wget bash-completion
+
+RUN mkdir -p /root/.local/bin
+
+WORKDIR /root/dotfiles
+
+# nodejs
+COPY ./scripts/nodejs.sh ./scripts/
+RUN /root/dotfiles/scripts/nodejs.sh
+
+# docker
+COPY ./scripts/docker.sh ./scripts/
+COPY ./scripts/configs/wsl-docker-daemon.json ./scripts/configs/
+RUN /root/dotfiles/scripts/docker.sh
+
+# golang
+COPY ./scripts/golang.sh ./scripts/
+RUN /root/dotfiles/scripts/golang.sh
+
+# tmux
+COPY ./scripts/tmux/* ./scripts/tmux/
+COPY ./tmux.conf .
+RUN /root/dotfiles/scripts/tmux/tmux.sh
+
+# k8s clis
+COPY ./scripts/k8s.sh ./scripts/
+RUN /root/dotfiles/scripts/k8s.sh
+
+# vim
+COPY ./scripts/vim/* ./scripts/vim/
+COPY ./vimrc .
+RUN /root/dotfiles/scripts/vim/vim.sh
+RUN /root/dotfiles/scripts/vim/ale.sh
+
+# bash
+COPY ./scripts/bash.sh ./scripts/
+COPY ./bashrc .
+RUN /root/dotfiles/scripts/bash.sh
+
+# Add Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+
+# Run your program under Tini
+ENTRYPOINT ["/tini", "--"]
+CMD ["/bin/bash"]

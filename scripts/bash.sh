@@ -10,5 +10,5 @@ if ! test -f "~/.bashrc"; then
     echo "Removing existing .bashrc"
     rm ~/.bashrc
 fi
-ln -s $SCRIPT_DIR/../../bashrc $HOME/.bashrc
-ln -s $SCRIPT_DIR/../../bashrc $HOME/.bash_profile
+ln -s $SCRIPT_DIR/../bashrc $HOME/.bashrc
+ln -s $SCRIPT_DIR/../bashrc $HOME/.bash_profile

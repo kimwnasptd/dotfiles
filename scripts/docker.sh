@@ -25,4 +25,4 @@ usermod -aG docker $USER
 newgrp docker
 
 # copy wsl config
-cp ${SCRIPT_DIR}/wsl-docker-daemon.json /etc/docker/daemon.json
+cp ${SCRIPT_DIR}/configs/wsl-docker-daemon.json /etc/docker/daemon.json
