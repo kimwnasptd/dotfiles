@@ -1,6 +1,8 @@
 #!/bin/bash
+set -e
 set -o xtrace
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+VIMRC=$SCRIPT_DIR/../../vimrc
 
 echo "Installing vim..."
 apt install vim
@@ -13,7 +15,9 @@ if test -f "~/.vimrc"; then
     echo "Removing existing .vimrc"
     rm ~/.vimrc
 fi
-ln -s $SCRIPT_DIR/../../vimrc $HOME/.vimrc
+ln -s $VIMRC $HOME/.vimrc
 
 echo "Installing all plugins..."
+sed -i 's/colorscheme codedark/"colorscheme codedark/g' $VIMRC
 vim +PluginInstall +qall
+sed -i 's/"colorscheme codedark/colorscheme codedark/g' $VIMRC

@@ -4,11 +4,13 @@ set -o xtrace
 
 mkdir -p ~/.local/bin
 
-./k8s.sh
-./golang.sh
-./nodejs.sh
-./bash/bash.sh
-./tmux/tmux.sh
-./docker/docker.sh
-./vim/vim.sh
-./vim/ale.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+$SCRIPT_DIR/k8s.sh
+$SCRIPT_DIR/golang.sh
+$SCRIPT_DIR/nodejs.sh
+$SCRIPT_DIR/bash/bash.sh
+$SCRIPT_DIR/tmux/tmux.sh
+$SCRIPT_DIR/docker/docker.sh
+$SCRIPT_DIR/vim/vim.sh
+$SCRIPT_DIR/vim/ale.sh
