@@ -7,7 +7,7 @@ chmod +x kubectl
 mv kubectl ~/.local/bin/kubectl
 
 # kind
-go install sigs.k8s.io/kind@v0.17.0
+/usr/local/go/bin/go install sigs.k8s.io/kind@v0.17.0
 
 # kustomize 5.0.1
 wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.0.1/kustomize_v5.0.1_linux_amd64.tar.gz
