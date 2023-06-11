@@ -6,7 +6,7 @@ mkdir -p ~/.local/bin
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-sudo apt install \
+sudo apt install -y \
     git \
     xclip
 
