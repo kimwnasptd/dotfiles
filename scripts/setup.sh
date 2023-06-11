@@ -6,6 +6,10 @@ mkdir -p ~/.local/bin
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+sudo apt install \
+    git \
+    xclip
+
 $SCRIPT_DIR/k8s.sh
 $SCRIPT_DIR/golang.sh
 $SCRIPT_DIR/nodejs.sh
