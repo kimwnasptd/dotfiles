@@ -38,6 +38,7 @@ filetype plugin indent on    " required
 syntax enable
 set encoding=utf-8
 set fileformats=unix,dos,mac
+set clipboard^=unnamedplus
 
 " colorscheme
 set t_Co=256

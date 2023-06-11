@@ -136,7 +136,11 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export SSH_KEY_PATH=~/.ssh/my_key
 export OTWUSERDIR="/d/4lvdQNWjQNpj9yey6x0L"
 
-alias c='xclip -in -selection clipboard'
+# clipboard
+alias cb="xclip -sel clip"
+#alias cb="clip.exe"
+#alias cb="pbcopy"
+
 alias e='vim -p'
 alias p='python3'
 alias o="xdg-open"
