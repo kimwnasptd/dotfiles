@@ -180,7 +180,7 @@ alias scale-down='gsettings set org.gnome.desktop.interface text-scaling-factor 
 alias openvpn-arr='su -c "openvpn --cd /etc/openvpn/ --config arr.conf"'
 alias k="kubectl"
 alias kf="kubectl -n kubeflow"
-alias kfu="kubectl -n kubeflow-user"
+alias kfu="kubectl -n kubeflow-user-example-com"
 alias kfwatch="watch kubectl get pods -n kubeflow"
 alias kfuwatch="watch kubectl get pods -n kubeflow-user"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
@@ -238,6 +238,16 @@ if [ /usr/local/bin/kubectl ]; then kubectl-completion; fi
 
 export TERM=xterm-256color
 export KUBE_EDITOR="vim"
+
+# tmux and remembering commands between shells
+# avoid duplicates..
+export HISTCONTROL=ignoredups:erasedups
+
+# append history entries..
+shopt -s histappend
+
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # Custom utility functions
 function retag-arrikto-image() {
@@ -444,4 +454,26 @@ function gcloud-cluster-gpus-up {
 
 function microk8s-kubeconfig {
     sudo microk8s kubectl config view --raw > $HOME/.kube/config
+}
+
+function microk8s-ckf-setup {
+    sudo snap install microk8s --classic --channel=1.24/stable
+    sudo usermod -a -G microk8s $USER
+    newgrp microk8s
+    sudo chown -f -R $USER ~/.kube
+    microk8s enable dns hostpath-storage ingress metallb:10.64.140.43-10.64.140.49
+    microk8s status --wait-ready
+}
+
+function microk8s-quick-install {
+    sudo snap install microk8s --classic --channel=1.24/stable
+    sudo chown -f -R $USER ~/.kube
+    microk8s enable dns hostpath-storage ingress metallb:10.64.140.43-10.64.140.49
+    microk8s-kubeconfig
+    microk8s status --wait-ready
+}
+
+function juju-ckf-bootstrap {
+    sg microk8s -c "juju bootstrap microk8s micro"
+    juju add-model kubeflow
 }

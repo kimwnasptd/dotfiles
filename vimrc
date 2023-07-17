@@ -25,6 +25,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'pedrohdz/vim-yaml-folds'
 
 " Color scheme
 Plugin 'tomasiser/vim-code-dark'
@@ -38,7 +39,7 @@ filetype plugin indent on    " required
 syntax enable
 set encoding=utf-8
 set fileformats=unix,dos,mac
-set clipboard^=unnamedplus
+set clipboard^=unnamed,unnamedplus
 
 " colorscheme
 set t_Co=256
