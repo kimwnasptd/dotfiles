@@ -141,6 +141,9 @@ alias cb="xclip -sel clip"
 #alias cb="clip.exe"
 #alias cb="pbcopy"
 
+# gpg and signing commits
+export GPG_TTY=$(tty)
+
 alias e='vim -p'
 alias p='python3'
 alias o="xdg-open"
