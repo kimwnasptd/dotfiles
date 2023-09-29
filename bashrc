@@ -476,7 +476,19 @@ function microk8s-quick-install {
     microk8s status --wait-ready
 }
 
-function juju-ckf-bootstrap {
+function ckf-install {
     sg microk8s -c "juju bootstrap microk8s micro"
+
+    # Deploy Kubeflow
     juju add-model kubeflow
+    juju deploy kubeflow --channel=1.7/stable --trust
+
+    # Post Deploy Configuration
+    juju config dex-auth \
+
+    public-url=http://10.64.140.43.nip.io \
+    static-username=admin \
+    static-password=admin
+
+    juju config oidc-gatekeeper public-url=http://10.64.140.43.nip.io
 }
