@@ -367,50 +367,6 @@ function eks-scale-up {
         --nodegroup-name $EKS_NODEGROUP
 }
 
-# Minikf
-export ARR_GCP_PROJECT="arrikto-playground"
-export ARR_GCP_MINIKF_ZONE="europe-west1-b"
-export ARR_GCP_MINIKF="kimwnasptd-minikf-dev"
-
-function minikf-ip() {
-    gcloud compute instances describe \
-        --project ${ARR_GCP_PROJECT} \
-        --zone ${ARR_GCP_MINIKF_ZONE} ${ARR_GCP_MINIKF} \
-        --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
-}
-
-function minikf-proxy() {
-    sshuttle -v -l 0.0.0.0 -r root@transporter.arr $(minikf-ip)
-}
-
-function minikf-start {
-    gcloud compute instances start \
-        --project arrikto-playground ${ARR_GCP_MINIKF} \
-        --zone=${ARR_GCP_MINIKF_ZONE}
-}
-
-function minikf-stop {
-    gcloud compute instances stop \
-        --project arrikto-playground ${ARR_GCP_MINIKF} \
-        --zone=${ARR_GCP_MINIKF_ZONE}
-}
-
-function minikf-ssh {
-    gcloud compute ssh \
-        minikf@$ARR_GCP_MINIKF --zone=$ARR_GCP_MINIKF_ZONE\
-        -- -J root@transporter.arr
-}
-
-function minikf-k8s {
-    # fetch the minikf kubeconfig
-    gcloud compute scp --zone=$ARR_GCP_MINIKF_ZONE \
-        minikf@$ARR_GCP_MINIKF:/home/minikf/.kube/minikf-kubeconfig \
-        $HOME/.kube/config
-
-    # remove tls checks
-    kubectl config set-cluster minikf --insecure-skip-tls-verify=true
-}
-
 # gcloud k8s clusters
 export CLUSTER_ZONE="europe-west1-b"
 export K8S_CLUSTER="kimwnasptd-kubeflow-dev"
@@ -459,8 +415,11 @@ function microk8s-kubeconfig {
     sudo microk8s kubectl config view --raw > $HOME/.kube/config
 }
 
-function microk8s-ckf-setup {
+function microk8s-install {
     sudo snap install microk8s --classic --channel=1.24/stable
+}
+
+function microk8s-ckf-setup {
     sudo usermod -a -G microk8s $USER
     newgrp microk8s
     sudo chown -f -R $USER ~/.kube
@@ -484,11 +443,17 @@ function ckf-install {
     juju deploy kubeflow --channel=1.7/stable --trust
 
     # Post Deploy Configuration
-    juju config dex-auth \
+    juju config dex-auth
 
-    public-url=http://10.64.140.43.nip.io \
-    static-username=admin \
+    public_url=http://10.64.140.43.nip.io
+    static-username=admin
     static-password=admin
 
     juju config oidc-gatekeeper public-url=http://10.64.140.43.nip.io
+}
+
+function microk8s-purge {
+    sudo microk8s reset
+    sudo snap remove microk8s
+    rm -rf ~/.local/share/juju
 }
