@@ -252,40 +252,6 @@ shopt -s histappend
 # After each command, save and reload history
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# Custom utility functions
-function retag-arrikto-image() {
-    echo "Pulling image: $1"
-    docker pull $1
-    IMG=$(echo $1 | sed --expression='s/arrikto-playground/arrikto/g')
-
-    echo "Pushing image: $IMG"
-    docker tag $1 $IMG
-    docker push $IMG
-}
-
-function iptables-flush() {
-    # Accept all traffic first to avoid ssh lockdown  via iptables firewall rules #
-    sudo iptables -P INPUT ACCEPT
-    sudo iptables -P FORWARD ACCEPT
-    sudo iptables -P OUTPUT ACCEPT
-
-    # Flush All Iptables Chains/Firewall rules #
-    sudo iptables -F
-
-    # Delete all Iptables Chains #
-    sudo iptables -X
-
-    # Flush all counters too #
-    sudo iptables -Z
-    # Flush and delete all nat and  mangle #
-    sudo iptables -t nat -F
-    sudo iptables -t nat -X
-    sudo iptables -t mangle -F
-    sudo iptables -t mangle -X
-    sudo iptables -t raw -F
-    sudo iptables -t raw -X
-}
-
 function proxy-aws() {
     # https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html
     echo "Fetching AWS IPs..."
