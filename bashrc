@@ -311,6 +311,14 @@ function reload-network() {
     sudo systemctl restart NetworkManager
 }
 
+function git-pr-checkout() {
+    local remote=$1
+    local pr_num=$2
+
+    git fetch $remote pull/$pr_num/head:pr-$pr_num
+    git checkout pr-$pr_num
+}
+
 # AWS
 export EKS_CLUSTER=kimwnasptd-ekf
 export EKS_NODEGROUP=general-workers
