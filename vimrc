@@ -221,7 +221,7 @@ let g:ale_fixers = {
 \   'vue': ['eslint'],
 \   'cpp': ['clang-format'],
 \   'json': ['prettier'],
-\   'python': ['isort', 'trim_whitespace', 'autopep8'],
+\   'python': ['isort', 'black'],
 \   'go': ['gofmt', 'goimports'],
 \   'c': ['clang-format'],
 \}
