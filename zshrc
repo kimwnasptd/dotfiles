@@ -81,19 +81,15 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# https://unix.stackexchange.com/a/608921
+export GPG_TTY=$TTY
+
 export EDITOR="nvim"
 alias e=$EDITOR
 
 # tmux
 alias ts="tmux new -s "
 alias ta="tmux attach -t "
-
-# kubectl 
-alias k="kubectl"
-alias kf="kubectl -n kubeflow"
-alias kfu="kubectl -n kubeflow-user-example-com"
-
-source <(kubectl completion zsh)
 
 # dotfiles
 alias zshrc="e $HOME/.zshrc"
@@ -110,6 +106,13 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$CLOUDSDK_HOME/bin
 export PATH=$PATH:/opt/homebrew/bin
 export GOPATH=$HOME/go
+
+# kubectl 
+alias k="kubectl"
+alias kf="kubectl -n kubeflow"
+alias kfu="kubectl -n kubeflow-user-example-com"
+
+source <(kubectl completion zsh)
 
 # Generic functions
 function replace() {
