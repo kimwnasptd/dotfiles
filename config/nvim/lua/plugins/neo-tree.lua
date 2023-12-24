@@ -12,6 +12,11 @@ return {
     vim.keymap.set('n', '<leader>gs', ':Neotree git_status toggle left<CR>', {})
 
     require("neo-tree").setup({
+      window = {
+        mappings = {
+          ["<c-x>"] = "noop",  -- Remove clear_filter mapping of C-x (use to quit)
+         }
+      },
       event_handlers = {
 
         {

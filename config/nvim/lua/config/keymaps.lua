@@ -6,9 +6,7 @@ vim.keymap.set("n", "<CR>", "O<esc>", { noremap = true })
 
 -- Save/Quit
 vim.keymap.set("", "<C-Z>", ":update<CR>", { noremap = true })
-vim.keymap.set("v", "<C-Z>", "<C-C>:update<CR>", { noremap = true })
-vim.keymap.set("i", "<C-Z>", "<C-O>:update<CR>", { noremap = true })
-vim.keymap.set("n", "<C-X>", "<Cmd>quit<CR>", { noremap = true })
+vim.keymap.set("n", "<C-X>", ":quit<CR>", { noremap = true })
 
 -- Beginning and end of line
 vim.keymap.set("", "B", "0", { noremap = true })
