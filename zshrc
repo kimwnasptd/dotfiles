@@ -120,6 +120,10 @@ function replace() {
     find . -type f -exec sed -i $EXPR {} +
 }
 
+function multipass-ip() {
+    multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
+}
+
 # Git functions
 function git-pr-checkout() {
     local remote=$1
