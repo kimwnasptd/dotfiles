@@ -114,6 +114,10 @@ alias kfu="kubectl -n kubeflow-user-example-com"
 
 source <(kubectl completion zsh)
 
+# Python verv
+export PY_ENVS="$HOME/Code/python-envs"
+alias pyenvs="ls ${PY_ENVS}"
+
 # Generic functions
 function replace() {
     EXPR="s#$1#g"
