@@ -90,6 +90,7 @@ alias e=$EDITOR
 # tmux
 alias ts="tmux new -s "
 alias ta="tmux attach -t "
+alias fixssh="eval $(tmux show-env -s | grep SSH_AUTH)"
 
 # dotfiles
 alias zshrc="e $HOME/.zshrc"
