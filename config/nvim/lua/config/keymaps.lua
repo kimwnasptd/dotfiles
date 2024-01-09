@@ -23,6 +23,7 @@ vim.keymap.set("", "<Leader>n", "<esc>:tabprevious<CR>", {})
 vim.keymap.set("", "<Leader>m", "<esc>:tabnext<CR>", {})
 
 -- Search highlight
+vim.keymap.set("n", "<C-f>", "", { noremap = true })
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>", {
   noremap = true
 })
