@@ -20,7 +20,7 @@ chmod +x kubectl
 mv kubectl ~/.local/bin/kubectl
 
 # kind
-/usr/local/go/bin/go install sigs.k8s.io/kind@v0.17.0
+/usr/local/go/bin/go install sigs.k8s.io/kind@v0.20.0
 
 # kustomize 5.0.1
 wget $kustomize_url
