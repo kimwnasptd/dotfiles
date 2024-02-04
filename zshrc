@@ -81,6 +81,15 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Completions
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # https://unix.stackexchange.com/a/608921
 export GPG_TTY=$TTY
 
