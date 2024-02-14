@@ -147,6 +147,27 @@ function aws-stop-instance() {
     aws ec2 stop-instances --instance-ids $INSTANCE_ID
 }
 
+function aws-start-instance() {
+    INSTANCE_ID=$(aws ec2 describe-instances \
+      --filters "Name=tag:Name,Values=$1" \
+      --output text \
+      --query 'Reservations[*].Instances[*].InstanceId')
+
+    aws ec2 start-instances --instance-ids $INSTANCE_ID
+}
+
+function aws-ssh-instance() {
+    INSTANCE_IP=$(aws ec2 describe-instances \
+      --filters "Name=tag:Name,Values=$1" \
+      --output text \
+      --query 'Reservations[*].Instances[*].PublicIpAddress')
+
+    ssh -XA \
+      -L 8080:localhost:8080 \
+      -D 9999 \
+      ubuntu@$INSTANCE_IP
+}
+
 # Git functions
 function git-pr-checkout() {
     local remote=$1
