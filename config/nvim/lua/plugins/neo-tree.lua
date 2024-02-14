@@ -1,3 +1,14 @@
+-- Shortcuts:
+--  S - open split (right)
+--  s - open vsplit (down)
+--  t - open in new tab
+--  a - add file in current folder
+--  d - delete
+--  r - rename
+--  y - copy to clipboard
+--  x - cut to clipboard
+--  p - paste
+--  R - refresh
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
