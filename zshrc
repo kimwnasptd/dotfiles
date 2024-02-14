@@ -137,6 +137,16 @@ function multipass-ip() {
     multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
 }
 
+# AWS functions
+function aws-stop-instance() {
+    INSTANCE_ID=$(aws ec2 describe-instances \
+      --filters "Name=tag:Name,Values=$1" \
+      --output text \
+      --query 'Reservations[*].Instances[*].InstanceId')
+
+    aws ec2 stop-instances --instance-ids $INSTANCE_ID
+}
+
 # Git functions
 function git-pr-checkout() {
     local remote=$1
