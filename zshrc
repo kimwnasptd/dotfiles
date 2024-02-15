@@ -137,6 +137,11 @@ function multipass-ip() {
     multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
 }
 
+# microk8s functions
+function microk8s-kubeconfig {
+    sudo microk8s kubectl config view --raw > $HOME/.kube/config
+}
+#
 # AWS functions
 function aws-stop-instance() {
     INSTANCE_ID=$(aws ec2 describe-instances \
