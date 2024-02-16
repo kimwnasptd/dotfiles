@@ -13,8 +13,12 @@ sudo apt install -y \
 $SCRIPT_DIR/k8s.sh
 $SCRIPT_DIR/golang.sh
 $SCRIPT_DIR/nodejs.sh
-$SCRIPT_DIR/bash.sh
 $SCRIPT_DIR/tmux/tmux.sh
 $SCRIPT_DIR/docker.sh
-$SCRIPT_DIR/vim/vim.sh
-$SCRIPT_DIR/vim/ale.sh
+$SCRIPT_DIR/nvim/install.sh
+$SCRIPT_DIR/nvim/soft-links.sh
+$SCRIPT_DIR/pass.sh
+$SCRIPT_DIR/zsh/install.sh
+$SCRIPT_DIR/zsh/oh-my-zsh.sh
+$SCRIPT_DIR/zsh/ln-zshrc.sh
+
