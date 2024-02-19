@@ -1,12 +1,13 @@
 -- https://github.com/nvim-telescope/telescope.nvim
--- C-x    Open in split
--- C-v    Open in vsplit
--- C-t    Open in tab
--- H/M/L  (N) high/midle/low
--- C-u    Scroll up Preview
--- C-d    Scroll down Preview
--- C-u    Scroll up Preview
--- C-d    Scroll down Preview
+-- C-x        Open in split
+-- C-v        Open in vsplit
+-- C-t        Open in tab
+-- H/M/L      (N) high/midle/low
+-- C-u        Scroll up Preview
+-- C-d        Scroll down Preview
+-- C-u        Scroll up Preview
+-- C-d        Scroll down Preview
+-- leader-fg  Libe grep
 return {
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.5',
