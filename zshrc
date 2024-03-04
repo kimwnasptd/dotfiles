@@ -161,14 +161,21 @@ function aws-start-instance() {
     aws ec2 start-instances --instance-ids $INSTANCE_ID
 }
 
+function aws-ip-instance() {
+  INSTANCE_IP=$(aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=$1" \
+    --output text \
+    --query 'Reservations[*].Instances[*].PublicIpAddress')
+
+  echo $INSTANCE_IP
+}
+
 function aws-ssh-instance() {
-    INSTANCE_IP=$(aws ec2 describe-instances \
-      --filters "Name=tag:Name,Values=$1" \
-      --output text \
-      --query 'Reservations[*].Instances[*].PublicIpAddress')
+    INSTANCE_IP=$(aws-ip-instance $1)
 
     ssh -XA \
       -L 8080:localhost:8080 \
+      -L 20001:localhost:20001 \
       -D 9999 \
       ubuntu@$INSTANCE_IP
 }
