@@ -24,7 +24,7 @@ mv kubectl ~/.local/bin/kubectl
 
 # kustomize 5.0.1
 wget $kustomize_url
-tar xzvf *.tar.gz
+tar xzvf kustomize*.tar.gz
 chown $USER kustomize
 chmod +x kustomize
 mv kustomize ~/.local/bin/kustomize

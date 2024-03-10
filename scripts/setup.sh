@@ -6,7 +6,7 @@ mkdir -p ~/.local/bin
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-sudo apt install -y xclip
+sudo apt install -y xclip curl
 
 $SCRIPT_DIR/git.sh
 $SCRIPT_DIR/k8s.sh
