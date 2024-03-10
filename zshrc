@@ -87,7 +87,9 @@ then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
   autoload -Uz compinit
-  compinit
+  compinit -u
+  alias compinit="echo no more compinit!"
+  # https://superuser.com/a/1675753
 fi
 
 # https://unix.stackexchange.com/a/608921
