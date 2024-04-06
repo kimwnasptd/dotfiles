@@ -141,6 +141,15 @@ function compress-code-dir {
     tar -cv --use-compress-program=pigz -f $output $HOME/Code
 }
 
+function encrypt {
+    gpg -c --output $1.gpg $1
+}
+
+function decrypt {
+    file=$1
+    gpg -d $1 > "${file%.gpg}"
+}
+
 function multipass-ip() {
     multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
 }
