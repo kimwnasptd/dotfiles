@@ -11,6 +11,7 @@ sudo apt install -y xclip curl
 $SCRIPT_DIR/git.sh
 $SCRIPT_DIR/k8s.sh
 $SCRIPT_DIR/golang.sh
+$SCRIPT_DIR/aws.sh
 $SCRIPT_DIR/nodejs.sh
 $SCRIPT_DIR/tmux/tmux.sh
 $SCRIPT_DIR/docker.sh
