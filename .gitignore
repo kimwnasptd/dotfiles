@@ -19,3 +19,4 @@ tags
 [._]*.un~
 
 scripts/dockerd-entrypoint.sh
+config/nvim/lazy-lock.json
