@@ -137,7 +137,7 @@ function replace() {
 }
 
 function compress-code-dir {
-    output="code-$(hostname).tar.gz"
+    output="code-$(hostname)-$(date +"%Y-%m-%d").tar.gz"
     tar -cv --use-compress-program=pigz -f $output $HOME/Code
 }
 
