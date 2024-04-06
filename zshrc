@@ -122,6 +122,7 @@ export GOPATH=$HOME/go
 alias k="kubectl"
 alias kf="kubectl -n kubeflow"
 alias kfu="kubectl -n kubeflow-user-example-com"
+alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
 
 source <(kubectl completion zsh)
 
