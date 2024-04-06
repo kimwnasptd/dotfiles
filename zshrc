@@ -135,6 +135,11 @@ function replace() {
     find . -type f -exec sed -i $EXPR {} +
 }
 
+function compress-code-dir {
+    output="code-$(hostname).tar.gz"
+    tar -cv --use-compress-program=pigz -f $output $HOME/Code
+}
+
 function multipass-ip() {
     multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
 }
