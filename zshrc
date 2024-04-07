@@ -136,6 +136,14 @@ function replace() {
     find . -type f -exec sed -i $EXPR {} +
 }
 
+function clp() {
+    if [[ $(which xclip) ]]; then
+      xclip -sel clip
+    elif [[ $(which pbcopy) ]]; then
+      pbcopy
+    fi
+}
+
 function compress-code-dir {
     output="code-$(hostname)-$(date +"%Y-%m-%d").tar.gz"
     tar -cv --use-compress-program=pigz -f $output $HOME/Code
