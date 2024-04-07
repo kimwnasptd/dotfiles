@@ -107,6 +107,10 @@ return {
         vim.keymap.set('n', '<space>f', function()
           vim.lsp.buf.format { async = true }
         end, opts)
+        vim.keymap.set("n", "<leader>i",
+          ":lua vim.diagnostic.open_float(nil, {focus=true, scope=\"cursor\"})<CR>",
+          opts)
+
       end
 
       vim.api.nvim_create_autocmd('LspAttach', {
