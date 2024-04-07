@@ -17,16 +17,20 @@ end
 return {
   {
     "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
     config = function()
     local null_ls = require("null-ls")
 
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
       local sources = {
-        diagnostics.flake8,
+        -- diagnostics.flake8,
+        require('none-ls.diagnostics.flake8'),
+        require('none-ls.formatting.autopep8'),
         formatting.isort,
-        formatting.autopep8,
+        formatting.gofmt,
       }
 
       null_ls.setup({
