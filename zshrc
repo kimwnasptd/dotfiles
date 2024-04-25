@@ -118,7 +118,7 @@ export PATH=$PATH:$CLOUDSDK_HOME/bin
 export PATH=$PATH:/opt/homebrew/bin
 export GOPATH=$HOME/go
 
-# kubectl 
+# kubectl
 alias k="kubectl"
 alias kf="kubectl -n kubeflow"
 alias kfu="kubectl -n kubeflow-user-example-com"
@@ -160,6 +160,20 @@ function decrypt {
 
 function multipass-ip() {
     multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
+}
+
+function trivy-scan() {
+    docker run -v /var/run/docker.sock:/var/run/docker.sock \
+      -v `pwd`:`pwd` \
+      -w `pwd` \
+      --rm \
+      --name=scanner \
+      aquasec/trivy image \
+      --timeout 30m \
+      -f json \
+      -o trivy-report.json \
+      --ignore-unfixed \
+      $1
 }
 
 # microk8s functions
