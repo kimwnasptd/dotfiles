@@ -232,6 +232,10 @@ function fixssh() {
   eval $(tmux show-env -s | grep SSH_AUTH)
 }
 
+function git-rebase-sign() {
+    git rebase --exec 'git commit --amend --no-edit -n -S' -i $1
+}
+
 function git-https-to-ssh {
     # https://gist.github.com/m14t/3056747
 
