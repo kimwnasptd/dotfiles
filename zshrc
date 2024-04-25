@@ -81,6 +81,10 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Locales
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Completions
 if type brew &>/dev/null
 then
