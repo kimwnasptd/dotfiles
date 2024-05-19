@@ -184,7 +184,31 @@ function trivy-scan() {
 function microk8s-kubeconfig {
     sudo microk8s kubectl config view --raw > $HOME/.kube/config
 }
-#
+
+function install-ckf-1.8 {
+    sudo snap install microk8s --classic --channel=1.29/stable
+    microk8s enable dns
+    microk8s enable hostpath-storage
+    microk8s enable ingress
+    microk8s enable rbac
+    microk8s enable metallb:10.64.140.43-10.64.140.49
+
+    sudo snap install juju --classic --channel=3.1/stable
+    rm -rf ~/.local/share/juju
+
+    microk8s config | juju add-k8s my-k8s --client
+    juju bootstrap my-k8s uk8sx
+    juju add-model kubeflow
+    juju deploy kubeflow --trust  --channel=1.8/stable
+
+    juju config dex-auth public-url=http://10.64.140.43.nip.io
+    juju config oidc-gatekeeper public-url=http://10.64.140.43.nip.io
+
+    juju config dex-auth static-username=admin
+    juju config dex-auth static-password=admin
+
+    microk8s-kubeconfig
+}
 # AWS functions
 function aws-stop-instance() {
     INSTANCE_ID=$(aws ec2 describe-instances \
