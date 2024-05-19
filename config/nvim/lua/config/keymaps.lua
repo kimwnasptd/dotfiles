@@ -28,6 +28,10 @@ vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>", {
   noremap = true
 })
 
--- Visual mode indentation > < 
+-- Visual mode indentation > <
 vim.keymap.set("v", "<", "<gv", { noremap = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true })
+
+-- Clipboard --
+vim.keymap.set("", "<Leader>y", "\"*y", {})
+vim.keymap.set("", "<Leader>p", "\"*p", {})
