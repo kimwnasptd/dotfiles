@@ -2,7 +2,8 @@
 vim.keymap.set("i", "jk", "<esc>", { noremap = true })
 
 -- Enter -> add line
-vim.keymap.set("n", "<CR>", "O<esc>", { noremap = true })
+-- Comment out because it breaks quickfix window
+-- vim.keymap.set("n", "<CR>", "O<esc>", { noremap = true })
 
 -- Save/Quit
 vim.keymap.set("", "<C-Z>", ":update<CR>", { noremap = true })
