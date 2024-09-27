@@ -185,6 +185,28 @@ function microk8s-kubeconfig {
     sudo microk8s kubectl config view --raw > $HOME/.kube/config
 }
 
+function install-ckf-1.9 {
+    sudo snap install microk8s --classic --channel=1.29/stable
+    sudo microk8s enable dns
+    sudo microk8s enable hostpath-storage
+    sudo microk8s enable ingress
+    sudo microk8s enable rbac
+    sudo microk8s enable metallb:10.64.140.43-10.64.140.49
+
+    sudo snap install juju --classic --channel=3.5/stable
+    rm -rf ~/.local/share/juju
+
+    sudo microk8s config | juju add-k8s my-k8s --client
+    juju bootstrap my-k8s uk8sx
+    juju add-model kubeflow
+    juju deploy kubeflow --trust  --channel=1.9/stable
+
+    juju config dex-auth static-username=admin
+    juju config dex-auth static-password=admin
+
+    microk8s-kubeconfig
+}
+
 function install-ckf-1.8 {
     sudo snap install microk8s --classic --channel=1.29/stable
     sudo microk8s enable dns
