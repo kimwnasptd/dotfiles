@@ -231,7 +231,8 @@ function install-ckf-1.8 {
 
     microk8s-kubeconfig
 }
-# AWS functions
+
+# AWS VMs functions
 function aws-stop-instance() {
     INSTANCE_ID=$(aws ec2 describe-instances \
       --filters "Name=tag:Name,Values=$1" \
@@ -267,6 +268,28 @@ function aws-ssh-instance() {
       -L 20001:localhost:20001 \
       -D 9999 \
       ubuntu@$INSTANCE_IP
+}
+
+# EKS helpers
+export EKS_CLUSTER=dev
+export EKS_NODEGROUP=general-workers
+
+function eks-kubeconfig {
+    aws eks update-kubeconfig --name $EKS_CLUSTER
+}
+
+function eks-scale-down {
+    aws eks update-nodegroup-config \
+        --scaling-config minSize=0,maxSize=1,desiredSize=0 \
+        --cluster-name $EKS_CLUSTER \
+        --nodegroup-name $EKS_NODEGROUP
+}
+
+function eks-scale-up {
+    aws eks update-nodegroup-config \
+        --scaling-config minSize=0,maxSize=4,desiredSize=3 \
+        --cluster-name $EKS_CLUSTER \
+        --nodegroup-name $EKS_NODEGROUP
 }
 
 # Git functions
