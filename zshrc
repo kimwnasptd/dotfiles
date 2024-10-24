@@ -204,6 +204,20 @@ function install-ckf-1.9 {
     juju config dex-auth static-username=admin
     juju config dex-auth static-password=admin
 
+    # mlflow
+    juju deploy mlflow --channel=2.15/stable --trust
+    juju deploy resource-dispatcher --channel 2.0/stable --trust
+
+    juju integrate mlflow-server:secrets resource-dispatcher:secrets
+    juju integrate mlflow-server:pod-defaults resource-dispatcher:pod-defaults
+
+    juju integrate mlflow-minio:object-storage kserve-controller:object-storage
+    juju integrate kserve-controller:service-accounts resource-dispatcher:service-accounts
+    juju integrate kserve-controller:secrets resource-dispatcher:secrets
+
+    juju integrate mlflow-server:ingress istio-pilot:ingress
+    juju integrate mlflow-server:dashboard-links kubeflow-dashboard:links
+
     microk8s-kubeconfig
 }
 
