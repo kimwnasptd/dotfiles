@@ -315,7 +315,7 @@ function git-pr-checkout() {
     git checkout pr-$pr_num
 }
 
-function ssh-key-tmux-fix() {
+function ssh-tmux-fix() {
   eval $(tmux show-env -s | grep SSH_AUTH)
 }
 
