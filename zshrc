@@ -122,11 +122,12 @@ export PATH=$PATH:$CLOUDSDK_HOME/bin
 export PATH=$PATH:/opt/homebrew/bin
 export GOPATH=$HOME/go
 
-# kubectl
+# utility aliases
 alias k="kubectl"
 alias kf="kubectl -n kubeflow"
 alias kfu="kubectl -n kubeflow-user-example-com"
 alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 
 source <(kubectl completion zsh)
 
@@ -180,25 +181,55 @@ function trivy-scan() {
       $1
 }
 
-# microk8s functions
+# Canonical
 function microk8s-kubeconfig {
     sudo microk8s kubectl config view --raw > $HOME/.kube/config
 }
 
-function install-ckf-1.9 {
-    sudo snap install microk8s --classic --channel=1.29/stable
+function install-microk8s {
+    sudo snap install microk8s --classic --channel=1.31/stable
     sudo microk8s enable dns
     sudo microk8s enable hostpath-storage
     sudo microk8s enable ingress
     sudo microk8s enable rbac
     sudo microk8s enable metallb:10.64.140.43-10.64.140.49
+}
 
+function install-juju-kubeflow {
     sudo snap install juju --classic --channel=3.5/stable
     rm -rf ~/.local/share/juju
 
-    sudo microk8s config | juju add-k8s my-k8s --client
+    if command -v microk8s >/dev/null 2>&1; then
+        sudo microk8s config | juju add-k8s sibyl-k8s --client
+    else
+        cat .kube/config | juju add-k8s sibyl-k8s --client
+    fi
+
     juju bootstrap my-k8s uk8sx
     juju add-model kubeflow
+}
+
+function install-juju-sibyl {
+    sudo snap install juju --classic --channel=3.5/stable
+    rm -rf ~/.local/share/juju
+
+    if command -v microk8s >/dev/null 2>&1; then
+        echo "Adding MicroK8s to juju"
+        sudo microk8s config | juju add-k8s sibyl-k8s --client
+    else
+        echo "Adding generic K8s to juju"
+        cat ~/.kube/config | juju add-k8s sibyl-k8s --client
+    fi
+
+    sudo microk8s config | juju add-k8s sibyl-k8s --client
+    juju bootstrap sibyl-k8s sibyl
+    juju add-model tokyo
+}
+
+function install-ckf-1.9 {
+    install-microk8s
+    install-juju-kubeflow
+
     juju deploy kubeflow --trust  --channel=1.9/stable
 
     juju config dex-auth static-username=admin
