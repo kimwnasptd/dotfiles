@@ -221,7 +221,6 @@ function install-juju-sibyl {
         cat ~/.kube/config | juju add-k8s sibyl-k8s --client
     fi
 
-    sudo microk8s config | juju add-k8s sibyl-k8s --client
     juju bootstrap sibyl-k8s sibyl
     juju add-model tokyo
 }
