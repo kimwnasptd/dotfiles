@@ -27,8 +27,9 @@ return {
       local diagnostics = null_ls.builtins.diagnostics
       local sources = {
         -- diagnostics.flake8,
-        require('none-ls.diagnostics.flake8'),
-        require('none-ls.formatting.autopep8'),
+        -- require('none-ls.diagnostics.flake8'),
+        -- require('none-ls.formatting.autopep8'),
+        formatting.black,
         formatting.isort,
         formatting.gofmt,
       }
