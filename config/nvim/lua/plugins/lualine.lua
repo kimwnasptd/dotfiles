@@ -11,9 +11,9 @@ return {
       },
       sections = {
         lualine_b = { 'branch' },
-        lualine_x = { 'diagnostics' },
-        lualine_y = { '' },
-        lualine_z = { '' },
+        lualine_x = { 'location' },
+        lualine_y = { 'diagnostics' },
+        lualine_z = { 'progress' },
       }
     })
   end
