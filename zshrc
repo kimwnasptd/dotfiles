@@ -126,6 +126,7 @@ export GOPATH=$HOME/go
 alias k="kubectl"
 alias kf="kubectl -n kubeflow"
 alias kfu="kubectl -n kubeflow-user-example-com"
+alias kfa="kubectl -n admin"
 alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 
@@ -225,10 +226,7 @@ function install-juju-sibyl {
     juju add-model tokyo
 }
 
-function install-ckf-1.9 {
-    install-microk8s
-    install-juju-kubeflow
-
+function install-ckf-1.9-only {
     juju deploy kubeflow --trust  --channel=1.9/stable
 
     juju config dex-auth static-username=admin
@@ -249,6 +247,12 @@ function install-ckf-1.9 {
     juju integrate mlflow-server:dashboard-links kubeflow-dashboard:links
 
     microk8s-kubeconfig
+}
+
+function install-ckf-1.9 {
+    install-microk8s
+    install-juju-kubeflow
+    install-ckf-1.9-only
 }
 
 function install-ckf-1.8 {
@@ -274,6 +278,24 @@ function install-ckf-1.8 {
     juju config dex-auth static-password=admin
 
     microk8s-kubeconfig
+}
+
+function venv-python3.8 {
+    python3.8 -m venv venv
+    source venv/bin/activate
+    pip install tox
+}
+
+function venv-python3.10 {
+    python3.10 -m venv venv
+    source venv/bin/activate
+    pip install tox
+}
+
+function venv-python3.12 {
+    python3.10 -m venv venv
+    source venv/bin/activate
+    pip install tox
 }
 
 # AWS VMs functions
