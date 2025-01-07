@@ -132,9 +132,10 @@ alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wa
 
 source <(kubectl completion zsh)
 
-# Python verv
+# Python
 export PY_ENVS="$HOME/Code/python-envs"
 alias pyenvs="ls ${PY_ENVS}"
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring  # poetry
 
 # Generic functions
 function replace() {
@@ -197,7 +198,7 @@ function install-microk8s {
 }
 
 function install-juju-kubeflow {
-    sudo snap install juju --classic --channel=3.5/stable
+    sudo snap install juju --classic --channel=3.6/stable
     rm -rf ~/.local/share/juju
 
     if command -v microk8s >/dev/null 2>&1; then
@@ -211,7 +212,7 @@ function install-juju-kubeflow {
 }
 
 function install-juju-sibyl {
-    sudo snap install juju --classic --channel=3.5/stable
+    sudo snap install juju --classic --channel=3.6/stable
     rm -rf ~/.local/share/juju
 
     if command -v microk8s >/dev/null 2>&1; then
