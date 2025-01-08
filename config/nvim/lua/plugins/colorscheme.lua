@@ -6,7 +6,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
-      -- vim.cmd.colorscheme "catppuccin"
+      vim.cmd.colorscheme "catppuccin"
     end
   },
   {
@@ -21,7 +21,7 @@ return {
   {
     "Mofiqul/vscode.nvim",
     config = function()
-      vim.cmd.colorscheme "vscode"
+      -- vim.cmd.colorscheme "vscode"
     end
   },
   {
