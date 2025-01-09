@@ -1,4 +1,4 @@
-LOCAL_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls" }
+LOCAL_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls@v0.14.2" }
 
 return {
   {
@@ -32,6 +32,12 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       for _, lsp in ipairs(LOCAL_SERVERS) do
+        -- remove @ that includes the version
+        local at_index = string.find(lsp, "@")
+        if at_index then
+          lsp = string.sub(lsp, 1, at_index - 1)
+        end
+
         lspconfig[lsp].setup({
           capabilities = capabilities
         })
