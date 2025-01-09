@@ -207,7 +207,7 @@ function install-juju-kubeflow {
         cat .kube/config | juju add-k8s sibyl-k8s --client
     fi
 
-    juju bootstrap my-k8s uk8sx
+    juju bootstrap sibyl-k8s sibyl
     juju add-model kubeflow
 }
 
