@@ -11,9 +11,11 @@ sudo apt-get install -y \
         ninja-build \
         pkg-config \
         unzip \
-        gettext
+        gettext \
+        ripgrep
 
 cd /tmp
 git clone https://github.com/neovim/neovim
+git checkout v0.10.3
 cd neovim && git checkout stable && make CMAKE_BUILD_TYPE=RelWithDebInfo
 cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
