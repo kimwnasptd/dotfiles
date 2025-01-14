@@ -98,6 +98,7 @@ fi
 
 # https://unix.stackexchange.com/a/608921
 export GPG_TTY=$TTY
+export DISPLAY=""
 
 export EDITOR="nvim"
 alias e=$EDITOR
