@@ -7,7 +7,6 @@ sudo snap install charmcraft --classic
 getent group lxd | grep -qwF "$USER" || sudo usermod -aG lxd "$USER"
 
 # LXD and docker
-sudo iptables  -I DOCKER-USER -i lxdbr0 -j ACCEPT
-sudo ip6tables -I DOCKER-USER -i lxdbr0 -j ACCEPT
-sudo iptables  -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-sudo ip6tables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+$SCRIPT_DIR/lxd-docker.sh
