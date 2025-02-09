@@ -185,6 +185,31 @@ function trivy-scan() {
 }
 
 # Canonical
+function rock-docker-push {
+    rock=$1
+    img=$2
+    sudo rockcraft.skopeo --insecure-policy \
+        copy \
+        oci-archive:$rock \
+        docker-daemon:$img
+
+    docker push $img
+}
+
+function rock-run {
+    rock=$1
+    cmd=$2
+
+    sudo rockcraft.skopeo --insecure-policy \
+        copy \
+        oci-archive:$rock \
+        docker-daemon:tmp-rock:latest \
+        1>/dev/null
+
+    echo "---| $cmd"
+    docker run --rm --entrypoint bash -ti tmp-rock -c $cmd
+}
+
 function microk8s-kubeconfig {
     sudo microk8s kubectl config view --raw > $HOME/.kube/config
 }
