@@ -4,10 +4,10 @@ cd /tmp
 arch="$(arch)"
 case "$arch" in
     'aarch64')
-        url=https://go.dev/dl/go1.20.2.linux-arm64.tar.gz
+        url=https://go.dev/dl/go1.23.6.linux-arm64.tar.gz
         ;;
     'x86_64')
-        url=https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
+        url=https://go.dev/dl/go1.23.6.linux-amd64.tar.gz
         ;;
 esac
 
