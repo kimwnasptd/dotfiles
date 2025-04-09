@@ -130,6 +130,7 @@ alias kfu="kubectl -n kubeflow-user-example-com"
 alias kfa="kubectl -n admin"
 alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
+alias bat="batcat"
 
 source <(kubectl completion zsh)
 
@@ -185,14 +186,21 @@ function trivy-scan() {
 }
 
 # Canonical
-function rock-docker-push {
+function rock-docker-load {
     rock=$1
     img=$2
+
     sudo rockcraft.skopeo --insecure-policy \
         copy \
         oci-archive:$rock \
         docker-daemon:$img
+}
 
+function rock-docker-push {
+    rock=$1
+    img=$2
+
+    rock-docker-load $rock $img
     docker push $img
 }
 
@@ -221,6 +229,7 @@ function install-microk8s {
     sudo microk8s enable ingress
     sudo microk8s enable rbac
     sudo microk8s enable metallb:10.64.140.43-10.64.140.49
+    microk8s-kubeconfig
 }
 
 function install-juju-kubeflow {
@@ -272,8 +281,6 @@ function install-ckf-1.9-only {
 
     juju integrate mlflow-server:ingress istio-pilot:ingress
     juju integrate mlflow-server:dashboard-links kubeflow-dashboard:links
-
-    microk8s-kubeconfig
 }
 
 function install-ckf-1.9 {
@@ -282,29 +289,10 @@ function install-ckf-1.9 {
     install-ckf-1.9-only
 }
 
-function install-ckf-1.8 {
-    sudo snap install microk8s --classic --channel=1.29/stable
-    sudo microk8s enable dns
-    sudo microk8s enable hostpath-storage
-    sudo microk8s enable ingress
-    sudo microk8s enable rbac
-    sudo microk8s enable metallb:10.64.140.43-10.64.140.49
-
-    sudo snap install juju --classic --channel=3.1/stable
-    rm -rf ~/.local/share/juju
-
-    sudo microk8s config | juju add-k8s my-k8s --client
-    juju bootstrap my-k8s uk8sx
-    juju add-model kubeflow
-    juju deploy kubeflow --trust  --channel=1.8/stable
-
-    juju config dex-auth public-url=http://10.64.140.43.nip.io
-    juju config oidc-gatekeeper public-url=http://10.64.140.43.nip.io
-
-    juju config dex-auth static-username=admin
-    juju config dex-auth static-password=admin
-
-    microk8s-kubeconfig
+function reinstall-microk8s-juju {
+    sudo snap remove microk8s --purge
+    install-microk8s
+    install-juju-sibyl
 }
 
 function venv-python3.8 {
