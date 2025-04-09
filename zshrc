@@ -262,8 +262,8 @@ function install-juju-sibyl {
     juju add-model tokyo
 }
 
-function install-ckf-1.9-only {
-    juju deploy kubeflow --trust  --channel=1.9/stable
+function install-ckf-1.10-only {
+    juju deploy kubeflow --trust  --channel=1.10/stable
 
     juju config dex-auth static-username=admin
     juju config dex-auth static-password=admin
@@ -283,10 +283,10 @@ function install-ckf-1.9-only {
     juju integrate mlflow-server:dashboard-links kubeflow-dashboard:links
 }
 
-function install-ckf-1.9 {
+function install-ckf-1.10 {
     install-microk8s
     install-juju-kubeflow
-    install-ckf-1.9-only
+    install-ckf-1.10-only
 }
 
 function reinstall-microk8s-juju {
