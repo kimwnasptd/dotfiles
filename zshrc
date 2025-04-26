@@ -139,6 +139,11 @@ export PY_ENVS="$HOME/Code/python-envs"
 alias pyenvs="ls ${PY_ENVS}"
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring  # poetry
 
+# Immich
+export UPLOAD_LOCATION=./library
+export BACKUP_SAMSUNG_SSD=/media/samsung-850-ssd
+export BACKUP_PATRIOT_SSD=/media/patriot-burst-ssd
+
 # Generic functions
 function replace() {
     EXPR="s#$1#g"
@@ -187,9 +192,9 @@ function trivy-scan() {
 
 # Canonical
 function rock-docker-load {
-    rock=$1
-    img=$2
+    img=$1
 
+    rock=$(ls | grep ".rock")
     sudo rockcraft.skopeo --insecure-policy \
         copy \
         oci-archive:$rock \
@@ -197,17 +202,17 @@ function rock-docker-load {
 }
 
 function rock-docker-push {
-    rock=$1
-    img=$2
+    img=$1
 
+    rock=$(ls | grep ".rock")
     rock-docker-load $rock $img
     docker push $img
 }
 
 function rock-run {
-    rock=$1
-    cmd=$2
+    cmd=$1
 
+    rock=$(ls | grep ".rock")
     sudo rockcraft.skopeo --insecure-policy \
         copy \
         oci-archive:$rock \
@@ -216,6 +221,17 @@ function rock-run {
 
     echo "---| $cmd"
     docker run --rm --entrypoint bash -ti tmp-rock -c $cmd
+}
+
+function rock-microk8s-load {
+    img=$1
+
+    rock-docker-load $img
+
+    docker save $img > rock.tar
+    sudo microk8s ctr image import rock.tar
+
+    rm rock.tar
 }
 
 function microk8s-kubeconfig {
