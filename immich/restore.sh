@@ -7,7 +7,7 @@ source $SCRIPT_DIR/common.env
 # By default we restore using the Samsung 850 (254Gb) SSD
 BACKUP_DISK=${BACKUP_DISK:-$BACKUP_SAMSUNG_SSD}
 
-echo "Navigating to the immich app dir"
+echo "Navigating to the immich app dir: $IMMICH_APP_DIR"
 cd $IMMICH_APP_DIR
 
 echo "Stopping running immich app"

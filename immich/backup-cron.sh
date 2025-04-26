@@ -7,7 +7,7 @@ source $SCRIPT_DIR/common.env
 echo "Ensuring the directory $IMMICH_APP_DIR/library exists"
 mkdir -p "$IMMICH_APP_DIR/library"
 
-echo "Navigating to the immich app dir"
+echo "Navigating to the immich app dir: $IMMICH_APP_DIR"
 cd $IMMICH_APP_DIR
 
 echo "---"
