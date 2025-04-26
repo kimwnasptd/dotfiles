@@ -1,4 +1,4 @@
-LOCAL_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls@v0.17.1", "tflint" }
+LOCAL_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls@v0.17.1", "tflint", "bashls" }
 
 return {
   {
