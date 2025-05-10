@@ -131,6 +131,7 @@ alias kfa="kubectl -n admin"
 alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 alias bat="batcat"
+alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.swp'"
 
 source <(kubectl completion zsh)
 
