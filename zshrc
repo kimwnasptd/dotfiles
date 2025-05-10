@@ -133,6 +133,10 @@ alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wa
 alias bat="batcat"
 alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.swp'"
 
+# ssh alias
+alias ssh-zenitsu="ssh -AX -L 8080:localhost:8080 -D 9999 kimwnasptd@zenitsu.sparidae-palermo.ts.net"
+alias ssh-beelink="ssh -AX -L 8080:localhost:8080 kimwnasptd@beelink.sparidae-palermo.ts.net"
+
 source <(kubectl completion zsh)
 
 # Python
