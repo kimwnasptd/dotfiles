@@ -329,7 +329,7 @@ function venv-python3.10 {
 }
 
 function venv-python3.12 {
-    python3.10 -m venv venv
+    python3.12 -m venv venv
     source venv/bin/activate
     pip install tox
 }
