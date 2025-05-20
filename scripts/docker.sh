@@ -4,7 +4,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Add Docker's official GPG key:
 sudo apt update
-sudo apt install ca-certificates curl
+sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL \
 	https://download.docker.com/linux/ubuntu/gpg \
@@ -18,6 +18,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # install docker
+sudo apt update
 sudo apt install -y \
 	docker-ce docker-ce-cli \
 	containerd.io \

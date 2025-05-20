@@ -136,7 +136,6 @@ alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.s
 # ssh alias
 alias ssh-zenitsu="ssh -AX -L 8080:localhost:8080 -D 9999 kimwnasptd@zenitsu.sparidae-palermo.ts.net"
 alias ssh-beelink="ssh -AX -L 8080:localhost:8080 kimwnasptd@beelink.sparidae-palermo.ts.net"
-alias ssh-dev-big="ssh -AX ubuntu@\$(multipass-ip dev-big)"
 
 source <(kubectl completion zsh)
 
@@ -151,7 +150,7 @@ export BACKUP_SAMSUNG_SSD=/media/samsung-850-ssd
 export BACKUP_PATRIOT_SSD=/media/patriot-burst-ssd
 
 # Generic functions
-function ssh-multipass() {
+function multipass-ssh() {
     vm=$1
     ssh -AX ubuntu@$(multipass-ip $vm)
 }

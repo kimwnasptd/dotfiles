@@ -9,4 +9,7 @@ Use the scripts to fully initialise a new Ubuntu-based machine.
 chsh -s /bin/zsh
 
 # when entering tmux: Ctrl - A + I
+
+# In case of multipass
+sudo passwd ubuntu
 ```

@@ -3,7 +3,7 @@ set -o xtrace
 # python 3.8 and poetry
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt update
-sudo apt install python3-poetry
+sudo apt install -y python3-poetry
 
 # Canonical tools
 sudo snap install charmcraft --classic

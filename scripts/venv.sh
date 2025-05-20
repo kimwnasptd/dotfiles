@@ -2,7 +2,7 @@
 set -e
 set -o xtrace
 
-sudo apt install python3-venv
+sudo apt install -y python3-venv
 
 python3 -m venv ~/Code/python-envs/kfapps
 python3 -m venv ~/Code/python-envs/rok

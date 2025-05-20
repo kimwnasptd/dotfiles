@@ -12,6 +12,10 @@ case "$arch" in
         ;;
 esac
 
+# needed directories
+mkdir -p ~/.local/bin
+mkdir -p ~/.kube
+
 # kubectl
 cd /tmp
 curl -LO $kubectl_url
