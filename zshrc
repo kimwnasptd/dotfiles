@@ -196,6 +196,9 @@ function trivy-scan() {
 }
 
 # Canonical
+alias canonical-vpn-up="sudo nmcli con up uk-kimwnasptd"
+alias canonical-vpn-down="sudo nmcli con down uk-kimwnasptd"
+
 function rock-docker-load {
     img=$1
 
