@@ -199,6 +199,13 @@ function trivy-scan() {
 alias canonical-vpn-up="sudo nmcli con up uk-kimwnasptd"
 alias canonical-vpn-down="sudo nmcli con down uk-kimwnasptd"
 
+function lxd-networking {
+    sudo iptables  -I DOCKER-USER -i lxdbr0 -j ACCEPT
+    sudo ip6tables -I DOCKER-USER -i lxdbr0 -j ACCEPT
+    sudo iptables  -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+    sudo ip6tables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+}
+
 function rock-docker-load {
     img=$1
 
