@@ -15,6 +15,7 @@ $SCRIPT_DIR/aws.sh
 $SCRIPT_DIR/nodejs.sh
 $SCRIPT_DIR/tmux/tmux.sh
 $SCRIPT_DIR/docker.sh
+$SCRIPT_DIR/python.sh
 $SCRIPT_DIR/charms.sh
 $SCRIPT_DIR/nvim/install.sh
 $SCRIPT_DIR/nvim/soft-links.sh
