@@ -150,9 +150,13 @@ export BACKUP_SAMSUNG_SSD=/media/samsung-850-ssd
 export BACKUP_PATRIOT_SSD=/media/patriot-burst-ssd
 
 # Generic functions
+function multipass-ip() {
+    multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
+}
+
 function multipass-ssh() {
     vm=$1
-    ssh -AX ubuntu@$(multipass-ip $vm)
+    ssh -AX -L 8080:localhost:8080 ubuntu@$(multipass-ip $vm)
 }
 
 function replace() {
@@ -180,10 +184,6 @@ function encrypt {
 function decrypt {
     file=$1
     gpg -d $1 > "${file%.gpg}"
-}
-
-function multipass-ip() {
-    multipass info $1 --format yaml | yq ".$1[0].ipv4[0]"
 }
 
 function trivy-scan() {
