@@ -211,6 +211,14 @@ function lxd-networking {
     sudo ip6tables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 }
 
+function clone-ckf-repos {
+    gh search repos \
+        --limit 500 \
+        --topic charmed-kubeflow \
+        | awk '{print $1}' \
+        | xargs -I {} git clone "git@github.com:{}"
+}
+
 function rock-docker-load {
     img=$1
 
