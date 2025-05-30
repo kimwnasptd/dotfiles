@@ -12,4 +12,7 @@ chsh -s /bin/zsh
 
 # In case of multipass
 sudo passwd ubuntu
+
+# gh cli, select to use browser
+BROWSER=false gh auth login
 ```

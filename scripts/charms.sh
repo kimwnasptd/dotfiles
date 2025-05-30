@@ -8,3 +8,8 @@ getent group lxd | grep -qwF "$USER" || sudo usermod -aG lxd "$USER"
 # LXD and docker
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 $SCRIPT_DIR/lxd-docker.sh
+
+# GH CLI
+wget https://github.com/cli/cli/releases/download/v2.74.0/gh_2.74.0_linux_amd64.deb
+sudo dpkg -i gh_2.74.0_linux_amd64.deb
+rm gh_2.74.0_linux_amd64.deb
