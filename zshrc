@@ -224,8 +224,7 @@ function rock-docker-load {
 function rock-docker-push {
     img=$1
 
-    rock=$(ls | grep ".rock")
-    rock-docker-load $rock $img
+    rock-docker-load $img
     docker push $img
 }
 
