@@ -342,6 +342,10 @@ function reinstall-microk8s-juju {
     install-juju-sibyl
 }
 
+function sourvevenv {
+    source venv/bin/activate
+}
+
 function venv-python3.8 {
     python3.8 -m venv venv
     source venv/bin/activate
