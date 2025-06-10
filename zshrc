@@ -342,7 +342,7 @@ function reinstall-microk8s-juju {
     install-juju-sibyl
 }
 
-function sourvevenv {
+function sourcevenv {
     source venv/bin/activate
 }
 
