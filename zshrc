@@ -132,10 +132,7 @@ alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 alias bat="batcat"
 alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.swp'"
-
-# ssh alias
-alias ssh-zenitsu="ssh -AX -L 8080:localhost:8080 -D 9999 kimwnasptd@zenitsu.sparidae-palermo.ts.net"
-alias ssh-beelink="ssh -AX -L 8080:localhost:8080 kimwnasptd@beelink.sparidae-palermo.ts.net"
+alias macos-wifi="ipconfig getsummary en0 | grep -w 'SSID :' | awk '{print \$NF}'"
 
 source <(kubectl completion zsh)
 
@@ -148,6 +145,28 @@ export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring  # poetry
 export UPLOAD_LOCATION=./library
 export BACKUP_SAMSUNG_SSD=/media/samsung-850-ssd
 export BACKUP_PATRIOT_SSD=/media/patriot-burst-ssd
+
+# ssh
+function external-local-tailscale-addr() {
+    external_addr=$1
+    local_addr=$2
+
+    if [[ "$(macos-wifi)" == "Netshphere" ]]; then
+        echo $local_addr
+    else
+        echo $external_addr
+    fi
+}
+
+function ssh-zenitsu() {
+    addr=$(external-local-tailscale-addr zenitsu.sparidae-palermo.ts.net 192.168.86.83)
+    ssh -AX -L 8080:localhost:8080 -D 9999 kimwnasptd@$addr
+}
+
+function ssh-beelink() {
+    addr=$(external-local-tailscale-addr beelink.sparidae-palermo.ts.net 192.168.86.56)
+    ssh -AX -L 8080:localhost:8080 -D 9999 kimwnasptd@$addr
+}
 
 # Generic functions
 function multipass-ip() {
