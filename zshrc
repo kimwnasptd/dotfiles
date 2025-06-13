@@ -280,8 +280,42 @@ function rock-microk8s-load {
     rm rock.tar
 }
 
-function ck8s-kubeconfig {
+function k8s-kubeconfig {
+    mkdir -p ~/.kube
     sudo k8s config view > $HOME/.kube/config
+}
+
+function install-k8s() {
+    sudo mount -o remount,size=10G /run
+
+    sudo snap install k8s --classic --channel=1.32-classic/stable
+    k8s-kubeconfig
+
+    cat <<EOF | sudo k8s bootstrap --file -
+containerd-base-dir: /run/containerd
+cluster-config:
+  network:
+    enabled: true
+  dns:
+    enabled: true
+  local-storage:
+    enabled: true
+EOF
+    sudo k8s status --wait-ready
+    sudo k8s enable dns
+    sudo k8s enable network
+    sudo k8s enable ingress
+    sudo k8s enable load-balancer
+    sudo k8s enable local-storage
+
+    sudo k8s set \
+      load-balancer.bgp-mode=true \
+      load-balancer.bgp-local-asn=64512 \
+      load-balancer.bgp-peer-address=10.0.10.63 \
+      load-balancer.bgp-peer-asn=64512 \
+      load-balancer.bgp-peer-port=7012 \
+      load-balancer.cidrs=10.64.140.43-10.64.140.49
+    sudo k8s enable load-balancer
 }
 
 function microk8s-kubeconfig {
