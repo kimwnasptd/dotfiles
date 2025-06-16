@@ -286,6 +286,7 @@ function k8s-kubeconfig {
 }
 
 function install-k8s() {
+    sudo rm -rf /run/containerd
     sudo mount -o remount,size=10G /run
 
     sudo snap install k8s --classic --channel=1.32-classic/stable
