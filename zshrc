@@ -290,7 +290,6 @@ function install-k8s() {
     sudo mount -o remount,size=10G /run
 
     sudo snap install k8s --classic --channel=1.32-classic/stable
-    k8s-kubeconfig
 
     cat <<EOF | sudo k8s bootstrap --file -
 containerd-base-dir: /run/containerd
@@ -302,6 +301,7 @@ cluster-config:
   local-storage:
     enabled: true
 EOF
+    k8s-kubeconfig
     sudo k8s status --wait-ready
     sudo k8s enable dns
     sudo k8s enable network
