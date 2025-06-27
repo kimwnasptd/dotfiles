@@ -13,3 +13,8 @@ $SCRIPT_DIR/lxd-docker.sh
 wget https://github.com/cli/cli/releases/download/v2.74.0/gh_2.74.0_linux_amd64.deb
 sudo dpkg -i gh_2.74.0_linux_amd64.deb
 rm gh_2.74.0_linux_amd64.deb
+
+# jhack
+sudo snap install --edge jhack
+sudo snap connect jhack:dot-local-share-juju snapd
+sudo snap connect jhack:ssh-read snapd

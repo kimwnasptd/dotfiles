@@ -282,14 +282,18 @@ function rock-microk8s-load {
 
 function k8s-kubeconfig {
     mkdir -p ~/.kube
-    sudo k8s config view > $HOME/.kube/config
+    sudo k8s config > $HOME/.kube/config
 }
 
 function install-k8s() {
+    sudo apt remove -y \
+      docker-ce docker-ce-cli \
+      containerd.io \
+      docker-buildx-plugin docker-compose-plugin
     sudo rm -rf /run/containerd
     sudo mount -o remount,size=10G /run
 
-    sudo snap install k8s --classic --channel=1.32-classic/stable
+    sudo snap install k8s --classic --channel=1.33-classic/stable
 
     cat <<EOF | sudo k8s bootstrap --file -
 containerd-base-dir: /run/containerd
