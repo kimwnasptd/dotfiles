@@ -368,7 +368,8 @@ function install-juju-sibyl {
 }
 
 function install-ckf-1.10-only {
-    juju deploy kubeflow --trust  --channel=1.10/stable
+    risk="${1:-stable}"
+    juju deploy kubeflow --trust  --channel=1.10/$risk
 
     juju config dex-auth static-username=admin
     juju config dex-auth static-password=admin
@@ -381,7 +382,9 @@ function install-ckf-1.10-only {
     juju integrate mlflow-server:pod-defaults resource-dispatcher:pod-defaults
 
     juju integrate mlflow-minio:object-storage kserve-controller:object-storage
-    juju integrate kserve-controller:service-accounts resource-dispatcher:service-accounts
+    juju integrate \
+        kserve-controller:service-accounts \
+        resource-dispatcher:service-accounts
     juju integrate kserve-controller:secrets resource-dispatcher:secrets
 
     juju integrate mlflow-server:ingress istio-pilot:ingress
@@ -389,9 +392,11 @@ function install-ckf-1.10-only {
 }
 
 function install-ckf-1.10 {
+    risk="${1:-stable}"
+
     install-microk8s
     install-juju-kubeflow
-    install-ckf-1.10-only
+    install-ckf-1.10-only $risk
 }
 
 function reinstall-microk8s-juju {
