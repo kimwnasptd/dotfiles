@@ -368,8 +368,16 @@ function install-juju-sibyl {
 }
 
 function install-ckf-only {
-    channel="${1:-1.10/stable}"
-    juju deploy kubeflow --trust --channel=$channel
+    track="${1:-1.10}"
+    risk="${2:-stable}"
+
+    # clone ckf bundle repo
+    url="https://raw.githubusercontent.com/canonical/bundle-kubeflow"
+    bundle_path="refs/heads/main/releases/$track/$risk/bundle.yaml"
+    curl -s $url/$bundle_path > bundle.yaml
+
+    juju deploy ./bundle.yaml --trust
+    rm ./bundle.yaml
 
     juju config dex-auth static-username=admin
     juju config dex-auth static-password=admin
@@ -392,11 +400,12 @@ function install-ckf-only {
 }
 
 function install-ckf {
-    channel="${1:-1.10/stable}"
+    track="${1:-1.10}"
+    risk="${2:-stable}"
 
     install-microk8s
     install-juju-kubeflow
-    install-ckf-only $channel
+    install-ckf-only $track $risk
 }
 
 function reinstall-microk8s-juju {
