@@ -133,6 +133,7 @@ alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wa
 alias bat="batcat"
 alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.swp'"
 alias macos-wifi="ipconfig getsummary en0 | grep -w 'SSID :' | awk '{print \$NF}'"
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 
 source <(kubectl completion zsh)
 
