@@ -499,8 +499,8 @@ function eks-scale-up {
 
 # Git functions
 function git-pr-checkout() {
-    local remote=$1
-    local pr_num=$2
+    local pr_num=$1
+    local remote="${2:-origin}"
 
     git fetch $remote pull/$pr_num/head:pr-$pr_num
     git checkout pr-$pr_num
