@@ -128,6 +128,7 @@ alias k="kubectl"
 alias kf="kubectl -n kubeflow"
 alias kfu="kubectl -n kubeflow-user-example-com"
 alias kfa="kubectl -n admin"
+alias kt="kubectl -n tokyo"
 alias netshoot="kubectl run netshoot --rm -i --tty --image nicolaka/netshoot"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 alias bat="batcat"
@@ -338,33 +339,30 @@ function install-microk8s {
     microk8s-kubeconfig
 }
 
-function install-juju-kubeflow {
+function install-juju {
     sudo snap install juju --classic --channel=3.6/stable
-    rm -rf ~/.local/share/juju
-
-    if command -v microk8s >/dev/null 2>&1; then
-        sudo microk8s config | juju add-k8s sibyl-k8s --client
-    else
-        cat .kube/config | juju add-k8s sibyl-k8s --client
-    fi
-
-    juju bootstrap sibyl-k8s sibyl
-    juju add-model kubeflow
 }
 
-function install-juju-sibyl {
-    sudo snap install juju --classic --channel=3.6/stable
+function bootstrap-juju {
     rm -rf ~/.local/share/juju
-
     if command -v microk8s >/dev/null 2>&1; then
-        echo "Adding MicroK8s to juju"
         sudo microk8s config | juju add-k8s sibyl-k8s --client
     else
-        echo "Adding generic K8s to juju"
         cat ~/.kube/config | juju add-k8s sibyl-k8s --client
     fi
 
     juju bootstrap sibyl-k8s sibyl
+}
+
+function install-juju-kubeflow {
+    install-juju
+    bootstrap-juju
+    juju add-model kubeflow
+}
+
+function install-juju-tokyo {
+    install-juju
+    bootstrap-juju
     juju add-model tokyo
 }
 
