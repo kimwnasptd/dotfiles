@@ -422,18 +422,21 @@ function venv-python3.8 {
     python3.8 -m venv venv
     source venv/bin/activate
     pip install tox
+    pip install poetry
 }
 
 function venv-python3.10 {
     python3.10 -m venv venv
     source venv/bin/activate
     pip install tox
+    pip install poetry
 }
 
 function venv-python3.12 {
     python3.12 -m venv venv
     source venv/bin/activate
     pip install tox
+    pip install poetry
 }
 
 # AWS VMs functions
