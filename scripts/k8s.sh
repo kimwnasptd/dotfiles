@@ -1,14 +1,18 @@
 set -o xtrace
 
+KUSTOMIZE_VERSION=v5.3.0
+KUBECTL_VERSION=$(curl -L -s https://dl.k8s.io/release/stable.txt)
+KIND_VERSION=v0.29.0
+
 arch="$(arch)"
 case "$arch" in
     'aarch64')
-        kustomize_url=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.3.0/kustomize_v5.3.0_linux_arm64.tar.gz
-        kubectl_url=https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl
+        kustomize_url=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F$KUSTOMIZE_VERSION/kustomize_${KUSTOMIZE_VERSION}_linux_arm64.tar.gz
+        kubectl_url=https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/arm64/kubectl
         ;;
     'x86_64')
-        kustomize_url=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.3.0/kustomize_v5.3.0_linux_amd64.tar.gz
-        kubectl_url=https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+        kustomize_url=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F$KUSTOMIZE_VERSION/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz
+        kubectl_url=https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl
         ;;
 esac
 
@@ -24,9 +28,9 @@ chmod +x kubectl
 mv kubectl ~/.local/bin/kubectl
 
 # kind
-/usr/local/go/bin/go install sigs.k8s.io/kind@v0.20.0
+/usr/local/go/bin/go install sigs.k8s.io/kind@${KIND_VERSION}
 
-# kustomize 5.0.1
+# kustomize
 wget $kustomize_url
 tar xzvf kustomize*.tar.gz
 chown $USER kustomize
