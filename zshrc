@@ -513,7 +513,7 @@ function ssh-tmux-fix() {
 }
 
 function git-rebase-sign() {
-    git rebase --exec 'git commit --amend --no-edit -n -S' -i $1
+    git rebase --exec 'git commit --amend --no-edit -n -S -s' -i $1
 }
 
 function git-https-to-ssh {
