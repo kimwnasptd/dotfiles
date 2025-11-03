@@ -8,3 +8,6 @@ sudo apt install -y \
     python3.8 python3.8-venv \
     python3.10 python3.10-venv \
     python3.12-venv
+
+# install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
