@@ -423,7 +423,14 @@ function reinstall-microk8s-juju {
 }
 
 function sourcevenv {
+  if [ -d ".venv" ]
+  then
+    echo "Sourcing .venv folder"
+    source .venv/bin/activate
+  else
+    echo "Sourcing ./venv folder"
     source venv/bin/activate
+  fi
 }
 
 function venv-python3.8 {
