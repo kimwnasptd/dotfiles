@@ -224,8 +224,15 @@ function trivy-scan() {
 }
 
 # Canonical
-alias canonical-vpn-up="sudo nmcli con up uk-kimwnasptd"
-alias canonical-vpn-down="sudo nmcli con down uk-kimwnasptd"
+function canonical-vpn-up {
+    location="${1:-uk}"
+    sudo nmcli con up $location-kimwnasptd
+}
+
+function canonical-vpn-down {
+    location="${1:-uk}"
+    sudo nmcli con down $location-kimwnasptd
+}
 
 function lxd-networking {
     sudo iptables  -I DOCKER-USER -i lxdbr0 -j ACCEPT
