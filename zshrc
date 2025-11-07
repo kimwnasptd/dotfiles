@@ -428,7 +428,7 @@ function sourcevenv {
     echo "Sourcing .venv folder"
     source .venv/bin/activate
   else
-    echo "Sourcing ./venv folder"
+    echo "Sourcing venv folder"
     source venv/bin/activate
   fi
 }
