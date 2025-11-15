@@ -20,6 +20,7 @@ $SCRIPT_DIR/charms.sh
 $SCRIPT_DIR/nvim/install.sh
 $SCRIPT_DIR/nvim/soft-links.sh
 $SCRIPT_DIR/pass.sh
+$SCRIPT_DIR/just.sh
 $SCRIPT_DIR/zsh/install.sh
 $SCRIPT_DIR/zsh/oh-my-zsh.sh
 $SCRIPT_DIR/zsh/ln-zshrc.sh
