@@ -1,4 +1,4 @@
-LOCAL_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls@v0.17.1", "tflint", "bashls" }
+LOCAL_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls@v0.17.1", "tflint", "bashls", "helm_ls" }
 
 return {
   {
@@ -20,12 +20,27 @@ return {
     end
   },
   {
+		"qvalentin/helm-ls.nvim",
+		ft = "helm",
+		opts = {
+			conceal_templates = {
+				-- enable the replacement of templates with virtual text of their current values
+				enabled = true, -- tree-sitter must be setup for this feature
+			},
+			indent_hints = {
+				-- enable hints for indent and nindent functions
+				enabled = true, -- tree-sitter must be setup for this feature
+			},
+		},
+	},
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
       "L3MON4D3/LuaSnip",
     },
+    event = { "BufReadPre", "BufNewFile", "BufEnter" },
     config = function()
       -- Setup lspconfig with language servers, and capabilities for nvim-cmp
       local lspconfig = require('lspconfig')
@@ -42,6 +57,18 @@ return {
           capabilities = capabilities
         })
       end
+
+      -- helm_ls
+      lspconfig.helm_ls.setup {
+        settings = {
+          ['helm-ls'] = {
+            yamlls = {
+              path = "~/.local/share/nvim/mason/bin/yaml-language-server",
+            }
+          }
+        }
+      }
+
 
       -- Setup nvim_cmp
       local luasnip = require('luasnip')

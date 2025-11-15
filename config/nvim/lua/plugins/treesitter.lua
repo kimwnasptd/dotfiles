@@ -1,11 +1,11 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
     config = function()
       local config = require("nvim-treesitter.configs")
       config.setup({
         auto_install = true,
+        build = ":TSUpdate",
         ensure_installed = {
           "python",
           "bash",
@@ -15,7 +15,9 @@ return {
           "vimdoc",
           "gitcommit",
           "gitignore",
-          "go"
+          "go",
+          "gotmpl",
+          "helm"
         },
         highlight = { enable = true },
         indent = { enable = true },
