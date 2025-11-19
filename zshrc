@@ -138,6 +138,9 @@ alias macos-wifi="ipconfig getsummary en0 | grep -w 'SSID :' | awk '{print \$NF}
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 
 source <(kubectl completion zsh)
+if command -v helm > /dev/null 2>&1; then
+  source <(helm completion zsh)
+fi
 
 # Python
 export PY_ENVS="$HOME/Code/python-envs"
