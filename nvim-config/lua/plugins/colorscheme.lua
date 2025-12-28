@@ -6,7 +6,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme "catppuccin-macchiato"
+      vim.cmd.colorscheme "catppuccin"
     end
   },
   {
@@ -17,6 +17,12 @@ return {
     config = function()
       -- vim.cmd.colorscheme "tokyonight"
     end
+  },
+  {
+    "EdenEast/nightfox.nvim",
+  },
+  {
+    'marko-cerovac/material.nvim',
   },
   {
     "navarasu/onedark.nvim",
