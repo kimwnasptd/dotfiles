@@ -9,7 +9,17 @@ function M.get_lua_runtime_path()
       return path .. "/lua"
     end
   end
+end
 
+function M.get_mason_package_name(package)
+  -- remove @ that includes the version
+  local at_index = string.find(package, "@")
+
+  if at_index then
+    return string.sub(package, 1, at_index - 1)
+  end
+
+  return package
 end
 
 return M
