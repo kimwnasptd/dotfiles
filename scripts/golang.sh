@@ -1,13 +1,15 @@
 set -o xtrace
 cd /tmp
 
+GO_VERSION=1.24.0
+
 arch="$(arch)"
 case "$arch" in
     'aarch64')
-        url=https://go.dev/dl/go1.23.6.linux-arm64.tar.gz
+        url=https://go.dev/dl/go$GO_VERSION.linux-arm64.tar.gz
         ;;
     'x86_64')
-        url=https://go.dev/dl/go1.23.6.linux-amd64.tar.gz
+        url=https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz
         ;;
 esac
 
