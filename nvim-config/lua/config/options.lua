@@ -12,3 +12,5 @@ vim.opt.smarttab = true
 vim.opt.wrap = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.completeopt:append"noselect"
+vim.opt.winborder = "rounded"

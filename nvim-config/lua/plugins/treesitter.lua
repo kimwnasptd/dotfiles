@@ -1,6 +1,9 @@
+-- Using a deprecated version. Need to switch from master to main
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/README.md
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     config = function()
       local config = require("nvim-treesitter.configs")
       config.setup({
@@ -17,7 +20,8 @@ return {
           "gitignore",
           "go",
           "gotmpl",
-          "helm"
+          "helm",
+          "lua",
         },
         highlight = { enable = true },
         indent = { enable = true },

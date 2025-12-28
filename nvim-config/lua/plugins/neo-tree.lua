@@ -11,7 +11,7 @@
 --  R - refresh
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  branch = "v3.x",
+  tag = "v3.38.0",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
@@ -23,13 +23,16 @@ return {
     vim.keymap.set('n', '<leader>gs', ':Neotree git_status toggle left<CR>', {})
 
     require("neo-tree").setup({
-      window = {
-        mappings = {
-          ["<c-x>"] = "noop",  -- Remove clear_filter mapping of C-x (use to quit)
-         }
+      -- Remove clear_filter mapping of C-x (use to quit)
+      filesystem = {
+        window = {
+          mappings = {
+            ["<C-x>"] = "noop",
+           }
+        },
       },
+      -- Close neo-tree once a file is opened
       event_handlers = {
-
         {
           event = "file_opened",
           handler = function(file_path)

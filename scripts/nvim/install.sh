@@ -12,10 +12,11 @@ sudo apt-get install -y \
         pkg-config \
         unzip \
         gettext \
+        inotify-tools \
         ripgrep
 
 cd /tmp
 git clone https://github.com/neovim/neovim
-git checkout v0.10.3
+git checkout v0.11.5
 cd neovim && git checkout stable && make CMAKE_BUILD_TYPE=RelWithDebInfo
 cd build && cpack -G DEB && sudo dpkg -i nvim-linux-x86_64.deb
