@@ -22,6 +22,7 @@ return {
           "gotmpl",
           "helm",
           "lua",
+          "yaml",
         },
         highlight = { enable = true },
         indent = { enable = true },
