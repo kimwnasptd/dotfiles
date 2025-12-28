@@ -10,7 +10,6 @@ return {
     config = function()
       local luasnip = require('luasnip')
       local cmp = require('cmp')
-      local minuet = require('minuet')
 
       local mappings = {
         ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
