@@ -1,9 +1,0 @@
-**.pyc
-__pycache__
-dockerconfig.json
-preseed.env
-preseed.env.gpg
-preseed.py
-preseed.py.gpg
-.rok-tools-data
-rok-tools-data*
