@@ -6,7 +6,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme "catppuccin"
+      -- vim.cmd.colorscheme "catppuccin"
     end
   },
   {
@@ -15,7 +15,32 @@ return {
     priority = 1000,
     opts = {},
     config = function()
-      -- vim.cmd.colorscheme "tokyonight"
+      vim.cmd.colorscheme "tokyonight"
+
+      -- import modules should have different color (blue)
+      vim.api.nvim_set_hl(0, "@module", { fg = "#65BCFF" })
+
+      -- async should be same as def (purple)
+      vim.api.nvim_set_hl(0, "@keyword", { fg = "#C099FF" })
+
+      -- variable members should be same as variables (white)
+      vim.api.nvim_set_hl(0, "@variable.member", { fg = "#C8D3F5" })
+
+      -- function parameters should be same as variables (white)
+      vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "#C8D3F5" })
+
+      -- docstrings should be same as strings (green)
+      vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#C3E88D" })
+
+      -- class constructor should be the same as import and arg Type (yellow)
+      vim.api.nvim_set_hl(0, "@constructor", { fg = "#FFC777" })
+      vim.api.nvim_set_hl(0, "@Type", { fg = "#FFC777" })
+
+      -- green docstrings
+      vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#C3E88D" })
+
+      -- self should be close with variable and function (cyan)
+      vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "#65BCFF" })
     end
   },
   {
@@ -24,6 +49,7 @@ return {
   {
     'marko-cerovac/material.nvim',
   },
+  { 'projekt0n/github-nvim-theme', name = 'github-theme' },
   {
     "navarasu/onedark.nvim",
     config = function()
