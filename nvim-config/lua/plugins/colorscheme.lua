@@ -32,12 +32,12 @@ return {
       -- docstrings should be same as strings (green)
       vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#C3E88D" })
 
-      -- class constructor should be the same as import and arg Type (yellow)
-      vim.api.nvim_set_hl(0, "@constructor", { fg = "#FFC777" })
-      vim.api.nvim_set_hl(0, "@Type", { fg = "#FFC777" })
+      -- class constructor should be the same as import and arg Type (blue)
+      vim.api.nvim_set_hl(0, "@constructor", { fg = "#65BCFF" })
+      vim.api.nvim_set_hl(0, "@Type", { fg = "#65BCFF" })
 
-      -- green docstrings
-      vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#C3E88D" })
+      -- docstrings (yellow)
+      vim.api.nvim_set_hl(0, "@string.documentation", { fg = "#FFC777" })
 
       -- self should be close with variable and function (cyan)
       vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "#65BCFF" })
