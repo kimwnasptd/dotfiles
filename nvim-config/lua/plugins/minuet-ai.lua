@@ -33,7 +33,8 @@ local minuet = {
 }
 
 
-if os.getenv("CODESTRAL_API_KEY") ~= nil then
+local codestral_api_key = os.getenv("CODESTRAL_API_KEY")
+if codestral_api_key ~= nil and codestral_api_key ~= "" then
   print("Codestral API Key found! LLM mode on.")
   return minuet
 else
