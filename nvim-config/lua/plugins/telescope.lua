@@ -4,16 +4,7 @@ return {
     tag = 'v0.2.0',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      -- custom theme
-      local pickers = {
-        find_files = {
-          theme = "dropdown",
-        }
-      }
-
-      require('telescope').setup{
-        pickers = pickers,
-      }
+      require('telescope').setup{}
 
       -- keymaps like ctrlp
       local builtin = require("telescope.builtin")
