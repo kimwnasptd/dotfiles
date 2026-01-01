@@ -18,8 +18,8 @@ return {
     -- vim.cmd.colorscheme "kanagawa"
     -- vim.cmd.colorscheme "doom-one"
     -- require('onedark').load()
-    -- vim.cmd("TNBrightLights")
+    vim.cmd("TNBrightLights")
     -- vim.cmd("TNZenBlueNight")
-    vim.cmd("TNZenBlue")
+    -- vim.cmd("TNZenBlue")
   end
 }
