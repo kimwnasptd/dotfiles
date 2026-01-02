@@ -7,10 +7,7 @@ TREE_SITTER_VERSION="v0.26.3"
 TREE_SITTER_BINARY="tree-sitter-linux-x64"
 
 # remove leftover files
-echo "Removing leftover cache/config directories"
-sudo rm -rf ~/.local/share/nvim
-sudo rm -rf ~/.local/state/nvim
-sudo rm -rf ~/.cache/nvim
+$SCRIPT_DIR/cleanup.sh
 
 # install dependencies
 echo "Installing build dependencies"
