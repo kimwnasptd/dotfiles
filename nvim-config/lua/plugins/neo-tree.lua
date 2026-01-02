@@ -11,7 +11,7 @@
 --  R - refresh
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  tag = "v3.38.0",
+  tag = "3.38.0",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
