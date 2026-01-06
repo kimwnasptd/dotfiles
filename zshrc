@@ -165,8 +165,7 @@ function external-local-tailscale-addr() {
 }
 
 function ssh-zenitsu() {
-    static_ip=192.168.86.123
-    addr=$(external-local-tailscale-addr zenitsu.sparidae-palermo.ts.net $static_ip)
+    addr=$(external-local-tailscale-addr zenitsu.sparidae-palermo.ts.net zenitsu)
     ssh -AY -L 8080:localhost:8080 -D 9999 kimwnasptd@$addr
 }
 
