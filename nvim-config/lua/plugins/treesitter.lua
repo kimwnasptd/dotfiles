@@ -1,5 +1,6 @@
 local parsers = { 'yaml', 'helm', 'python', 'bash', 'markdown_inline', 'vim',
-                  'gitcommit', 'gitcommit', 'go', 'gotmpl', 'lua', 'toml' }
+                  'gitcommit', 'gitcommit', 'go', 'gotmpl', 'lua', 'toml',
+                  'markdown' }
 
 -- Using a deprecated version. Need to switch from master to main
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/README.md
