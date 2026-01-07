@@ -363,7 +363,7 @@ function bootstrap-juju {
         cat ~/.kube/config | juju add-k8s sibyl-k8s --client
     fi
 
-    juju bootstrap sibyl-k8s sibyl
+    juju bootstrap --agent-version 3.6.11 sibyl-k8s sibyl
 }
 
 function install-juju-kubeflow {
