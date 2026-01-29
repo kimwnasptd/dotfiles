@@ -136,6 +136,7 @@ alias bat="batcat"
 alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.swp'"
 alias macos-wifi="ipconfig getsummary en0 | grep -w 'SSID :' | awk '{print \$NF}'"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
+alias dots="cd ~/Code/git/dotfiles"
 
 source <(kubectl completion zsh)
 if command -v helm > /dev/null 2>&1; then
@@ -585,3 +586,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# opencode
+export PATH=/home/ubuntu/.opencode/bin:$PATH
