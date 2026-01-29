@@ -1,5 +1,24 @@
 FORMATTING_AUGROUP = vim.api.nvim_create_augroup("LspFormatting", {})
 
+-- Global for controlling if formatting should be enabled or disabled
+NoneLsFormatting = true
+
+vim.api.nvim_create_user_command(
+  "DisableFormatting",
+  function(_)
+    NoneLsFormatting = false
+  end,
+  { desc = "Disabled the auto-formatting on save." }
+)
+
+vim.api.nvim_create_user_command(
+  "EnableeFormatting",
+  function(_)
+    NoneLsFormatting = true
+  end,
+  { desc = "Enabled the auto-formatting on save." }
+)
+
 -- Run formatting tools on BugWritePre event via autocmd
 ON_ATTACH_FN = function (client, bufnr)
   if client.supports_method("textDocument/formatting") then
@@ -8,7 +27,9 @@ ON_ATTACH_FN = function (client, bufnr)
       group = FORMATTING_AUGROUP,
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr })
+        if NoneLsFormatting then
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end
       end,
     })
   end
