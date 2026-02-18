@@ -120,7 +120,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/home/$USER/.npm-global/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$CLOUDSDK_HOME/bin
-export PATH=$PATH:/opt/homebrew/bin
+export PATH=/opt/homebrew/bin:$PATH
 export GOPATH=$HOME/go
 
 # utility aliases
@@ -160,6 +160,9 @@ export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring  # poetry
 export UPLOAD_LOCATION=./library
 export BACKUP_SAMSUNG_SSD=/media/samsung-850-ssd
 export BACKUP_PATRIOT_SSD=/media/patriot-burst-ssd
+
+# Shift-Enter (Mistral Vibe)
+bindkey -s '^[[13;2u' '\n'
 
 # ssh
 function external-local-tailscale-addr() {
