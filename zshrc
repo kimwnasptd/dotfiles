@@ -151,6 +151,12 @@ if command -v flux > /dev/null 2>&1; then
   source <(flux completion zsh)
 fi
 
+gcloud_completion_script=/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc
+if [ -f "$gcloud_completion_script" ]
+then
+    source $gcloud_completion_script
+fi
+
 # Python
 export PY_ENVS="$HOME/Code/python-envs"
 alias pyenvs="ls ${PY_ENVS}"
