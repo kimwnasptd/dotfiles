@@ -3,8 +3,6 @@ set -e
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 NVIM_VERSION="v0.11.5"
-TREE_SITTER_VERSION="v0.26.3"
-TREE_SITTER_BINARY="tree-sitter-linux-x64"
 
 # remove leftover files
 $SCRIPT_DIR/cleanup.sh
@@ -26,13 +24,7 @@ sudo apt-get install -y \
         ripgrep
 
 # install tree-sitter-cli
-mkdir -p ~/.local/bin
-wget https://github.com/tree-sitter/tree-sitter/releases/download/$TREE_SITTER_VERSION/$TREE_SITTER_BINARY.gz
-echo "Un-zipping tree-sitter binary"
-gunzip $TREE_SITTER_BINARY.gz
-chmod +x $TREE_SITTER_BINARY
-echo "Installing tree-sitter binary"
-mv $TREE_SITTER_BINARY ~/.local/bin/tree-sitter
+$SCRIPT_DIR/tree-sitter.sh
 
 # build from source
 echo "Building neovim deb package"
