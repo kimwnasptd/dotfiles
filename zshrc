@@ -188,9 +188,8 @@ function ssh-zenitsu() {
 }
 
 function ssh-beelink() {
-    # addr=$(external-local-tailscale-addr beelink.sparidae-palermo.ts.net 192.168.86.56)
-    # ssh -AY -L 8080:localhost:8080 -D 9999 kimwnasptd@$addr
-    ssh -AY -L 8080:localhost:8080 -D 9999 kimwnasptd@192.168.86.56
+    addr=$(external-local-tailscale-addr zenitsu.sparidae-palermo.ts.net beelink)
+    ssh -AY -L 8080:localhost:8080 -D 9999 kimwnasptd@$addr
 }
 
 # Generic functions
