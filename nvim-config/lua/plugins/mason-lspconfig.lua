@@ -1,4 +1,4 @@
-MASON_LSPCONFIG_SERVERS = { "lua_ls", "ruff", "pyright", "yamlls", "gopls", "tflint",
+MASON_LSPCONFIG_SERVERS = { "lua_ls", "ruff", "yamlls", "gopls", "tflint",
                             "bashls", "helm_ls", "terraformls" }
 MASON_NON_LSP_SERVERS = { "black", "isort", "gofumpt" }
 
