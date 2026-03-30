@@ -122,6 +122,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$CLOUDSDK_HOME/bin
 export PATH=/opt/homebrew/bin:$PATH
 export GOPATH=$HOME/go
+export PATH="/opt/homebrew/opt/helm@3/bin:$PATH"
 
 # utility aliases
 alias k="kubectl"
@@ -137,6 +138,7 @@ alias lst="tree -I '__pycache__|node_modules|venv|.git|.DS_Store|*.log|*.pyc|*.s
 alias macos-wifi="ipconfig getsummary en0 | grep -w 'SSID :' | awk '{print \$NF}'"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias dots="cd ~/Code/git/dotfiles"
+alias k8s="k9s"
 
 # completions
 if command -v kubectl > /dev/null 2>&1; then
@@ -156,6 +158,10 @@ if [ -f "$gcloud_completion_script" ]
 then
     source $gcloud_completion_script
 fi
+
+# terraform completions
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # Python
 export PY_ENVS="$HOME/Code/python-envs"
@@ -204,7 +210,7 @@ function multipass-ssh() {
 
 function replace() {
     EXPR="s#$1#g"
-    find . -type f -exec sed -i $EXPR {} +
+    find . -type f -exec sed -i '' $EXPR {} +
 }
 
 function clp() {
@@ -241,6 +247,20 @@ function trivy-scan() {
       -o trivy-report.json \
       --ignore-unfixed \
       $1
+}
+
+# Mistral AI
+export GEMFURY_DEPLOY_TOKEN=bkkex-BzMJMDttUaF7rmqEAHrfhs7sJY
+export PATH="~/Code/git/mistralai/dashboard/ts/node_modules/.bin:$PATH"
+
+# eval "$(fnm env --use-on-cd --shell zsh)"
+
+function cleanup-charts {
+  find . \
+    -type d \
+    -name "charts" \
+    -prune \
+    -exec sh -c 'echo "Deleting $0" && rm -rf "$0"' {} \;
 }
 
 # Canonical
